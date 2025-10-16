@@ -4,6 +4,8 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -49,6 +51,25 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private Label welcomeLabel;
+
+    @FXML
+    private Button fileButton;
+
+    @FXML
+    private Button helpButton;
+
+    @FXML
+    private void handleFile() {
+        handleExit();
+    }
+
+    @FXML
+    private void handleHelpButton() {
+        handleHelp();
+    }
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -121,6 +142,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        welcomeLabel.setText("Welcome back, Trainer!");
+
     }
 
     /**

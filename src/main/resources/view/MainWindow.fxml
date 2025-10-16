@@ -11,6 +11,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -24,36 +29,81 @@
       </stylesheets>
 
       <VBox>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-          </Menu>
-        </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+        <!-- Top Header -->
+        <VBox style="-fx-background-color: #2c2f33; -fx-padding: 10;" spacing="5">
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+          <!-- App Title (FitBook) -->
+          <Label fx:id="appTitleLabel"
+                 text="FitBook"
+                 style="-fx-text-fill: #00b4d8; -fx-font-size: 25px; -fx-font-weight: bold; -fx-alignment: CENTER_LEFT;"
+                 alignment="CENTER_LEFT"
+                 VBox.vgrow="NEVER"/>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          <!-- Divider Line -->
+          <Separator style="-fx-background-color: #555;" />
+
+          <!-- Welcome Text (centered below) -->
+          <StackPane alignment="CENTER">
+            <Label fx:id="welcomeLabel"
+                   text="Welcome Back, Trainer!"
+                   style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
+          </StackPane>
+
         </VBox>
 
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+        <!-- Main Section (Sidebar + Content) -->
+        <HBox spacing="0" VBox.vgrow="ALWAYS">
+
+          <!-- Sidebar -->
+          <VBox fx:id="sidebar" VBox.vgrow="ALWAYS"
+                style="-fx-background-color: #1e1e1e; -fx-padding: 10; -fx-pref-width: 170;" spacing="15">
+            <Button fx:id="fileButton" text="File" onAction="#handleFile"
+                    style="-fx-background-color: transparent; -fx-text-fill: #ffffff; -fx-font-size: 14px;" />
+            <Button fx:id="helpButton" text="Help" onAction="#handleHelp"
+                    style="-fx-background-color: transparent; -fx-text-fill: #ffffff; -fx-font-size: 14px;" />
+            <Region VBox.vgrow="ALWAYS"/>
+          </VBox>
+
+          <!-- Main Content -->
+          <VBox fx:id="mainContent" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" style="-fx-background-color: #2b2b2b;">
+            <!-- MenuBar (Hidden) -->
+            <MenuBar fx:id="menuBar" visible="false" managed="false">
+              <Menu mnemonicParsing="false" text="File">
+                <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+              </Menu>
+              <Menu mnemonicParsing="false" text="Help">
+                <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+              </Menu>
+            </MenuBar>
+
+            <!-- Person List -->
+            <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+              <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+
+            <!-- Command Box -->
+            <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+              <padding>
+                <Insets top="5" right="10" bottom="5" left="10" />
+              </padding>
+            </StackPane>
+
+            <!-- Result Display -->
+            <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
+                       minHeight="100" prefHeight="100" maxHeight="100">
+              <padding>
+                <Insets top="5" right="10" bottom="5" left="10" />
+              </padding>
+            </StackPane>
+
+            <!-- Status Bar -->
+            <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+          </VBox>
+        </HBox>
       </VBox>
     </Scene>
   </scene>
