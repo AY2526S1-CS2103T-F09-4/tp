@@ -10,6 +10,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -35,7 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private HelpOverlay helpOverlay;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -61,6 +62,12 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private Button helpButton;
 
+    @FXML
+    private HBox mainLayout;
+
+    @FXML
+    private StackPane helpOverlayPlaceholder;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -75,8 +82,6 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-
-        helpWindow = new HelpWindow();
     }
 
     @FXML
@@ -145,6 +150,8 @@ public class MainWindow extends UiPart<Stage> {
 
         welcomeLabel.setText("Welcome back, Trainer!");
 
+        helpOverlay = new HelpOverlay(this::hideHelpOverlay);
+        helpOverlayPlaceholder.getChildren().add(helpOverlay.getRoot());
     }
 
     /**
@@ -164,11 +171,35 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
+        showHelpOverlay();
+    }
+
+    private void showHelpOverlay() {
+        if (helpOverlay == null) {
+            return;
         }
+
+        if (helpOverlayPlaceholder.isVisible()) {
+            helpOverlay.focusOnCloseButton();
+            return;
+        }
+
+        mainLayout.setVisible(false);
+        mainLayout.setManaged(false);
+        helpOverlayPlaceholder.setManaged(true);
+        helpOverlayPlaceholder.setVisible(true);
+        helpOverlay.focusOnCloseButton();
+    }
+
+    private void hideHelpOverlay() {
+        if (helpOverlay == null || !helpOverlayPlaceholder.isVisible()) {
+            return;
+        }
+
+        helpOverlayPlaceholder.setVisible(false);
+        helpOverlayPlaceholder.setManaged(false);
+        mainLayout.setManaged(true);
+        mainLayout.setVisible(true);
     }
 
     void show() {
@@ -183,7 +214,6 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
         primaryStage.hide();
     }
 

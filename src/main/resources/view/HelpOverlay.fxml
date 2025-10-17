@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="help-overlay">
+  <BorderPane prefWidth="720" maxWidth="800" styleClass="help-overlay__panel">
+    <top>
+      <VBox alignment="CENTER_LEFT" spacing="6" padding="15">
+        <children>
+          <Label text="FitBook Command Reference" styleClass="help-overlay__title" />
+          <Label text="Use these commands in the command box. Press the Back button to return to your trainees." wrapText="true" styleClass="help-overlay__subtitle" />
+        </children>
+      </VBox>
+    </top>
+    <center>
+      <ScrollPane fx:id="commandScrollPane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" styleClass="help-overlay__scroll">
+        <content>
+          <VBox fx:id="commandListContainer" spacing="18" padding="20" />
+        </content>
+      </ScrollPane>
+    </center>
+    <bottom>
+      <VBox alignment="CENTER_RIGHT" padding="15">
+        <children>
+          <Button fx:id="closeButton" text="Back to FitBook" onAction="#handleClose" styleClass="help-overlay__close-button" />
+        </children>
+      </VBox>
+    </bottom>
+  </BorderPane>
+</StackPane>

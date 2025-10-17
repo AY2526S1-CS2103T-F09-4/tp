@@ -18,3 +18,71 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+.help-overlay {
+    -fx-background-color: rgba(0, 0, 0, 0.75);
+    -fx-alignment: center;
+}
+
+.help-overlay__panel {
+    -fx-background-color: #1f1f1f;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 20, 0.2, 0, 8);
+}
+
+.help-overlay__title {
+    -fx-text-fill: #00b4d8;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.help-overlay__subtitle {
+    -fx-text-fill: #e0e0e0;
+    -fx-font-size: 14px;
+}
+
+.help-overlay__scroll {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.help-overlay__scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.help-overlay__command {
+    -fx-background-color: rgba(32, 32, 32, 0.9);
+    -fx-padding: 14;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+}
+
+.help-overlay__command-title {
+    -fx-text-fill: #f1f1f1;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.help-overlay__command-description {
+    -fx-text-fill: #d0d0d0;
+    -fx-font-size: 13px;
+    -fx-line-spacing: 3px;
+}
+
+.help-overlay__close-button {
+    -fx-background-color: #00b4d8;
+    -fx-text-fill: #0b0b0b;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16 8 16;
+    -fx-background-radius: 6;
+}
+
+.help-overlay__close-button:hover {
+    -fx-background-color: #42c8f5;
+}
+
+.help-overlay__close-button:armed {
+    -fx-background-color: #0099b8;
+}

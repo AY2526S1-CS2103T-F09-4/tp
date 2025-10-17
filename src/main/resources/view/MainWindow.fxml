@@ -53,57 +53,62 @@
         </VBox>
 
         <!-- Main Section (Sidebar + Content) -->
-        <HBox spacing="0" VBox.vgrow="ALWAYS">
+        <StackPane VBox.vgrow="ALWAYS">
 
-          <!-- Sidebar -->
-          <VBox fx:id="sidebar" VBox.vgrow="ALWAYS"
-                style="-fx-background-color: #1e1e1e; -fx-padding: 10; -fx-pref-width: 170;" spacing="15">
-            <Button fx:id="fileButton" text="File" onAction="#handleFile"
-                    style="-fx-background-color: transparent; -fx-text-fill: #ffffff; -fx-font-size: 14px;" />
-            <Button fx:id="helpButton" text="Help" onAction="#handleHelp"
-                    style="-fx-background-color: transparent; -fx-text-fill: #ffffff; -fx-font-size: 14px;" />
-            <Region VBox.vgrow="ALWAYS"/>
-          </VBox>
+          <HBox fx:id="mainLayout" spacing="0" VBox.vgrow="ALWAYS">
 
-          <!-- Main Content -->
-          <VBox fx:id="mainContent" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" style="-fx-background-color: #2b2b2b;">
-            <!-- MenuBar (Hidden) -->
-            <MenuBar fx:id="menuBar" visible="false" managed="false">
-              <Menu mnemonicParsing="false" text="File">
-                <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-              </Menu>
-              <Menu mnemonicParsing="false" text="Help">
-                <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-              </Menu>
-            </MenuBar>
-
-            <!-- Person List -->
-            <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-              <padding>
-                <Insets top="10" right="10" bottom="10" left="10" />
-              </padding>
-              <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            <!-- Sidebar -->
+            <VBox fx:id="sidebar" VBox.vgrow="ALWAYS"
+                  style="-fx-background-color: #1e1e1e; -fx-padding: 10; -fx-pref-width: 170;" spacing="15">
+              <Button fx:id="fileButton" text="File" onAction="#handleFile"
+                      style="-fx-background-color: transparent; -fx-text-fill: #ffffff; -fx-font-size: 14px;" />
+              <Button fx:id="helpButton" text="Help" onAction="#handleHelp"
+                      style="-fx-background-color: transparent; -fx-text-fill: #ffffff; -fx-font-size: 14px;" />
+              <Region VBox.vgrow="ALWAYS"/>
             </VBox>
 
-            <!-- Command Box -->
-            <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
-              <padding>
-                <Insets top="5" right="10" bottom="5" left="10" />
-              </padding>
-            </StackPane>
+            <!-- Main Content -->
+            <VBox fx:id="mainContent" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" style="-fx-background-color: #2b2b2b;">
+              <!-- MenuBar (Hidden) -->
+              <MenuBar fx:id="menuBar" visible="false" managed="false">
+                <Menu mnemonicParsing="false" text="File">
+                  <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+                </Menu>
+              </MenuBar>
 
-            <!-- Result Display -->
-            <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                       minHeight="100" prefHeight="100" maxHeight="100">
-              <padding>
-                <Insets top="5" right="10" bottom="5" left="10" />
-              </padding>
-            </StackPane>
+              <!-- Person List -->
+              <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+                <padding>
+                  <Insets top="10" right="10" bottom="10" left="10" />
+                </padding>
+                <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              </VBox>
 
-            <!-- Status Bar -->
-            <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
-          </VBox>
-        </HBox>
+              <!-- Command Box -->
+              <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+                <padding>
+                  <Insets top="5" right="10" bottom="5" left="10" />
+                </padding>
+              </StackPane>
+
+              <!-- Result Display -->
+              <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
+                         minHeight="100" prefHeight="100" maxHeight="100">
+                <padding>
+                  <Insets top="5" right="10" bottom="5" left="10" />
+                </padding>
+              </StackPane>
+
+              <!-- Status Bar -->
+              <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+            </VBox>
+          </HBox>
+
+          <StackPane fx:id="helpOverlayPlaceholder" visible="false" managed="false" />
+        </StackPane>
       </VBox>
     </Scene>
   </scene>
