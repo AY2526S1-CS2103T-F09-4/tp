@@ -98,6 +98,7 @@ public class PersonTest {
                 + ALICE.getHeight() + ", weight=" + ALICE.getWeight()
                 + ", age=" + ALICE.getAge() + ", gender=" + ALICE.getGender()
                 + ", paid=" + ALICE.getPaymentStatus() + ", bodyfat=" + ALICE.getBodyfat()
+                + ", session=" + ALICE.getSession()
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }

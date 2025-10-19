@@ -19,5 +19,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_DEADLINE = new Prefix("dl/");
     public static final Prefix PREFIX_BODYFAT = new Prefix("bf/");
+    public static final Prefix PREFIX_SESSION = new Prefix("s/");
 
 }

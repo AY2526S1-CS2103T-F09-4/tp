@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SESSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -58,6 +59,8 @@ public class CommandTestUtil {
     public static final String VALID_PAID_BOB = "false";
     public static final String VALID_BODYFAT_AMY = "18.5";
     public static final String VALID_BODYFAT_BOB = "20.0";
+    public static final String VALID_SESSION_AMY = "WEEKLY:MON 18:00";
+    public static final String VALID_SESSION_BOB = "WEEKLY:TUE 19:00";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -83,6 +86,8 @@ public class CommandTestUtil {
     public static final String PAID_DESC_BOB = " " + PREFIX_PAID + VALID_PAID_BOB;
     public static final String BODYFAT_DESC_AMY = " " + PREFIX_BODYFAT + VALID_BODYFAT_AMY;
     public static final String BODYFAT_DESC_BOB = " " + PREFIX_BODYFAT + VALID_BODYFAT_BOB;
+    public static final String SESSION_DESC_AMY = " " + PREFIX_SESSION + VALID_SESSION_AMY;
+    public static final String SESSION_DESC_BOB = " " + PREFIX_SESSION + VALID_SESSION_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -91,6 +96,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_SESSION_DESC = " " + PREFIX_SESSION + "2025/01/01 25:00";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -101,10 +107,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND).withSession(VALID_SESSION_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withSession(VALID_SESSION_BOB).build();
     }
 
     /**

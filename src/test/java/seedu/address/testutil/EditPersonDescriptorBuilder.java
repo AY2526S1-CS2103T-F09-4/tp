@@ -17,6 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Paid;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Session;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
@@ -51,6 +52,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setDeadline(person.getDeadline());
         descriptor.setPaid(person.getPaymentStatus());
         descriptor.setBodyfat(person.getBodyfat());
+        descriptor.setSession(person.getSession());
         descriptor.setTags(person.getTags());
     }
 
@@ -147,6 +149,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withBodyfat(String bodyfat) {
         descriptor.setBodyfat(new Bodyfat(bodyfat));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Session} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSession(String session) {
+        descriptor.setSession(Session.fromString(session));
         return this;
     }
 

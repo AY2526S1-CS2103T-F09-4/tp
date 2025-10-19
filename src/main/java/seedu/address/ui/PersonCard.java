@@ -55,6 +55,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label paid;
     @FXML
+    private Label session;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -76,6 +78,7 @@ public class PersonCard extends UiPart<Region> {
         goal.setText("Personal Goal: " + person.getGoal().value);
         bodyfat.setText("Bodyfat Percentage: " + person.getBodyfat().toString() + "%");
         paid.setText("Payment Status: " + (person.getPaymentStatus().value ? "Paid" : "Not Paid"));
+        session.setText("Session: " + person.getSession().toStorageString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

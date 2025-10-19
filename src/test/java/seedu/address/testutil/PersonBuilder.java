@@ -15,6 +15,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Paid;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Session;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -36,6 +37,7 @@ public class PersonBuilder {
     public static final String DEFAULT_DEADLINE = "2025-12-31";
     public static final String DEFAULT_PAID = "true";
     public static final String DEFAULT_BODYFAT = "30.0";
+    public static final String DEFAULT_SESSION = "WEEKLY:MON 18:00";
 
     private Name name;
     private Phone phone;
@@ -49,6 +51,7 @@ public class PersonBuilder {
     private Deadline deadline;
     private Paid paid;
     private Bodyfat bodyfat;
+    private Session session;
     private Set<Tag> tags;
 
     /**
@@ -67,6 +70,7 @@ public class PersonBuilder {
         deadline = Deadline.fromString(DEFAULT_DEADLINE);
         paid = new Paid(DEFAULT_PAID);
         bodyfat = new Bodyfat(DEFAULT_BODYFAT);
+        session = Session.fromString(DEFAULT_SESSION);
         tags = new HashSet<>();
     }
 
@@ -86,6 +90,7 @@ public class PersonBuilder {
         deadline = personToCopy.getDeadline();
         paid = personToCopy.getPaymentStatus();
         bodyfat = personToCopy.getBodyfat();
+        session = personToCopy.getSession();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -194,13 +199,21 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Session} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSession(String session) {
+        this.session = Session.fromString(session);
+        return this;
+    }
+
+    /**
      * Builds the person with the specified attributes.
      *
      * @return the built person
      */
     public Person build() {
         return new Person(name, phone, email, address, goal, height, weight, age, gender,
-                deadline, paid, bodyfat, tags);
+                deadline, paid, bodyfat, session, tags);
     }
 
 }

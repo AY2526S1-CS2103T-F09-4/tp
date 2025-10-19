@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SESSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
@@ -48,6 +49,7 @@ public class PersonUtil {
         sb.append(PREFIX_DEADLINE + person.getDeadline().toStorageString() + " ");
         sb.append(PREFIX_PAID + person.getPaymentStatus().toString() + " ");
         sb.append(PREFIX_BODYFAT + String.valueOf(person.getBodyfat().value) + " ");
+        sb.append(PREFIX_SESSION + person.getSession().toStorageString() + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -71,6 +73,8 @@ public class PersonUtil {
                 .append(deadline.toStorageString()).append(" "));
         descriptor.getPaid().ifPresent(paid -> sb.append(PREFIX_PAID).append(paid.toString()).append(" "));
         descriptor.getBodyfat().ifPresent(bodyfat -> sb.append(PREFIX_BODYFAT).append(bodyfat.value).append(" "));
+        descriptor.getSession().ifPresent(session -> sb.append(PREFIX_SESSION).append(session.toStorageString())
+                .append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

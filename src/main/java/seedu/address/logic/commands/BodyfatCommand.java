@@ -68,6 +68,7 @@ public class BodyfatCommand extends Command {
                 personToEdit.getDeadline(),
                 personToEdit.getPaymentStatus(),
                 bodyfat,
+                personToEdit.getSession(),
                 personToEdit.getTags()
         );
 

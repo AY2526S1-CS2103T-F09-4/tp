@@ -22,6 +22,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Paid;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Session;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
@@ -44,6 +45,7 @@ class JsonAdaptedPerson {
     private final String gender;
     private final String bodyfat;
     private final String paid; // New field for payment status
+    private final String session;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -61,6 +63,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("gender") String gender,
                              @JsonProperty("deadline") String deadline,
                              @JsonProperty("paid") String paid,
+                             @JsonProperty("session") String session,
                              @JsonProperty("bodyfat") String bodyfat,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
@@ -74,6 +77,7 @@ class JsonAdaptedPerson {
         this.age = age;
         this.gender = gender;
         this.paid = paid;
+        this.session = session;
         this.bodyfat = bodyfat;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -95,6 +99,7 @@ class JsonAdaptedPerson {
         age = String.valueOf(source.getAge().value); // convert int → String
         gender = source.getGender().value; // convert Gender to String
         paid = source.getPaymentStatus().toString(); // Convert Paid to String
+        session = source.getSession().toStorageString();
         bodyfat = source.getBodyfat().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -206,10 +211,21 @@ class JsonAdaptedPerson {
         }
         final Bodyfat modelBodyfat = new Bodyfat(bodyfat);
 
+        if (session == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Session.class.getSimpleName()));
+        }
+        final Session modelSession;
+        try {
+            modelSession = Session.fromString(session);
+        } catch (IllegalArgumentException ex) {
+            throw new IllegalValueException(ex.getMessage(), ex);
+        }
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelGoal,
-                modelHeight, modelWeight, modelAge, modelGender, modelDeadline, modelPaid, modelBodyfat, modelTags);
+                modelHeight, modelWeight, modelAge, modelGender, modelDeadline, modelPaid, modelBodyfat,
+                modelSession, modelTags);
     }
 
 }

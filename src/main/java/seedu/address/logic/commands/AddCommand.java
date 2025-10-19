@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SESSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
@@ -40,6 +41,7 @@ public class AddCommand extends Command {
             + PREFIX_GENDER + "GENDER "
             + PREFIX_DEADLINE + "DEADLINE(yyyy-MM-dd) "
             + PREFIX_PAID + "PAID "
+            + PREFIX_SESSION + "SESSION "
             + PREFIX_BODYFAT + "BODYFAT "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -54,12 +56,15 @@ public class AddCommand extends Command {
             + PREFIX_GENDER + "male "
             + PREFIX_DEADLINE + "2025-11-10 "
             + PREFIX_PAID + "false "
+            + PREFIX_SESSION + "WEEKLY:MON 18:00 "
             + PREFIX_BODYFAT + "18.5 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_CONFLICTING_SESSION =
+            "This session slot is already booked by another person";
 
     private final Person toAdd;
 
@@ -77,6 +82,10 @@ public class AddCommand extends Command {
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (model.hasSessionConflict(toAdd)) {
+            throw new CommandException(MESSAGE_CONFLICTING_SESSION);
         }
 
         model.addPerson(toAdd);

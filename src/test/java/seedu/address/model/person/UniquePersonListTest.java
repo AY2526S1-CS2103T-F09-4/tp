@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.exceptions.ConflictingSessionException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
@@ -56,6 +57,13 @@ public class UniquePersonListTest {
     public void add_duplicatePerson_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
+    }
+
+    @Test
+    public void add_conflictingSession_throwsConflictingSessionException() {
+        uniquePersonList.add(ALICE);
+        Person clash = new PersonBuilder(BOB).withSession(ALICE.getSession().toStorageString()).build();
+        assertThrows(ConflictingSessionException.class, () -> uniquePersonList.add(clash));
     }
 
     @Test
@@ -110,6 +118,14 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void setPerson_conflictingSession_throwsConflictingSessionException() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        Person editedBob = new PersonBuilder(BOB).withSession(ALICE.getSession().toStorageString()).build();
+        assertThrows(ConflictingSessionException.class, () -> uniquePersonList.setPerson(BOB, editedBob));
+    }
+
+    @Test
     public void remove_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePersonList.remove(null));
     }
@@ -160,6 +176,13 @@ public class UniquePersonListTest {
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+    }
+
+    @Test
+    public void setPersons_listWithConflictingSessions_throwsConflictingSessionException() {
+        Person clash = new PersonBuilder(BOB).withSession(ALICE.getSession().toStorageString()).build();
+        List<Person> listWithConflict = Arrays.asList(ALICE, clash);
+        assertThrows(ConflictingSessionException.class, () -> uniquePersonList.setPersons(listWithConflict));
     }
 
     @Test

@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SESSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
@@ -42,7 +43,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_DEADLINE, PREFIX_GOAL, PREFIX_HEIGHT, PREFIX_WEIGHT,
-                        PREFIX_AGE, PREFIX_GENDER, PREFIX_PAID, PREFIX_BODYFAT, PREFIX_TAG);
+                        PREFIX_AGE, PREFIX_GENDER, PREFIX_PAID, PREFIX_SESSION, PREFIX_BODYFAT, PREFIX_TAG);
 
         Index index;
 
@@ -54,7 +55,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_DEADLINE, PREFIX_GOAL, PREFIX_HEIGHT, PREFIX_WEIGHT,
-                PREFIX_AGE, PREFIX_GENDER, PREFIX_PAID, PREFIX_BODYFAT);
+                PREFIX_AGE, PREFIX_GENDER, PREFIX_PAID, PREFIX_SESSION, PREFIX_BODYFAT);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -93,6 +94,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_BODYFAT).isPresent()) {
             editPersonDescriptor.setBodyfat(ParserUtil.parseBodyfat(argMultimap.getValue(PREFIX_BODYFAT).get()));
+        }
+        if (argMultimap.getValue(PREFIX_SESSION).isPresent()) {
+            editPersonDescriptor.setSession(ParserUtil.parseSession(argMultimap.getValue(PREFIX_SESSION).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 

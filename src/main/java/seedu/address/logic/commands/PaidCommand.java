@@ -67,6 +67,7 @@ public class PaidCommand extends Command {
                 personToEdit.getDeadline(),
                 paid, // updated paid status
                 personToEdit.getBodyfat(),
+                personToEdit.getSession(),
                 personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);

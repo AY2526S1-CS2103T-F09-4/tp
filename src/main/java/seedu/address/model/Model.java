@@ -58,6 +58,16 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if {@code person}'s session conflicts with an existing person in the address book.
+     */
+    boolean hasSessionConflict(Person person);
+
+    /**
+     * Returns true if {@code person}'s session conflicts with an existing person other than {@code toIgnore}.
+     */
+    boolean hasSessionConflict(Person person, Person toIgnore);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */

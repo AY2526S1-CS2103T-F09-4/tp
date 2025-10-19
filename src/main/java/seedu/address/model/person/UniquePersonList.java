@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.exceptions.ConflictingSessionException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -45,6 +46,9 @@ public class UniquePersonList implements Iterable<Person> {
         if (contains(toAdd)) {
             throw new DuplicatePersonException();
         }
+        if (hasSessionConflict(toAdd)) {
+            throw new ConflictingSessionException();
+        }
         internalList.add(toAdd);
     }
 
@@ -63,6 +67,10 @@ public class UniquePersonList implements Iterable<Person> {
 
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
             throw new DuplicatePersonException();
+        }
+
+        if (hasSessionConflict(editedPerson, target)) {
+            throw new ConflictingSessionException();
         }
 
         internalList.set(index, editedPerson);
@@ -93,6 +101,9 @@ public class UniquePersonList implements Iterable<Person> {
         if (!personsAreUnique(persons)) {
             throw new DuplicatePersonException();
         }
+        if (sessionsConflict(persons)) {
+            throw new ConflictingSessionException();
+        }
 
         internalList.setAll(persons);
     }
@@ -102,6 +113,23 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Returns true if {@code toCheck}'s session conflicts with another person in the list.
+     */
+    public boolean hasSessionConflict(Person toCheck) {
+        return hasSessionConflict(toCheck, null);
+    }
+
+    /**
+     * Returns true if {@code toCheck}'s session conflicts with another person in the list, ignoring {@code toIgnore}.
+     */
+    public boolean hasSessionConflict(Person toCheck, Person toIgnore) {
+        requireNonNull(toCheck);
+        return internalList.stream()
+                .filter(existing -> toIgnore == null || !existing.equals(toIgnore))
+                .anyMatch(existing -> existing.getSession().conflictsWith(toCheck.getSession()));
     }
 
     @Override
@@ -146,5 +174,16 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    private boolean sessionsConflict(List<Person> persons) {
+        for (int i = 0; i < persons.size() - 1; i++) {
+            for (int j = i + 1; j < persons.size(); j++) {
+                if (persons.get(i).getSession().conflictsWith(persons.get(j).getSession())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

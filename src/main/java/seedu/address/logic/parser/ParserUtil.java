@@ -21,6 +21,7 @@ import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Paid;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Session;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
@@ -171,6 +172,22 @@ public class ParserUtil {
     public static Deadline parseDeadline(Optional<String> rawOpt) throws ParseException {
         // If the prefix is missing entirely, treat as empty (no deadline)
         return parseDeadline(rawOpt.orElse(""));
+    }
+
+    /**
+     * Parses a {@code String session} into a {@code Session}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code session} is invalid.
+     */
+    public static Session parseSession(String session) throws ParseException {
+        requireNonNull(session);
+        String trimmedSession = session.trim();
+        try {
+            return Session.fromString(trimmedSession);
+        } catch (IllegalArgumentException ex) {
+            throw new ParseException(ex.getMessage(), ex);
+        }
     }
     /**
      * Parses a {@code String height} into a {@code Height}.

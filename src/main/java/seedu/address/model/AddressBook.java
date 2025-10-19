@@ -68,6 +68,23 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if {@code person}'s session conflicts with another person in the address book.
+     */
+    public boolean hasSessionConflict(Person person) {
+        requireNonNull(person);
+        return persons.hasSessionConflict(person);
+    }
+
+    /**
+     * Returns true if {@code person}'s session conflicts with another person excluding {@code toIgnore}.
+     */
+    public boolean hasSessionConflict(Person person, Person toIgnore) {
+        requireNonNull(person);
+        requireNonNull(toIgnore);
+        return persons.hasSessionConflict(person, toIgnore);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */

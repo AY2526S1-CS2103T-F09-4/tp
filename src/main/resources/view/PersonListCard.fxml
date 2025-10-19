@@ -58,6 +58,7 @@
       </Separator>
       <Label styleClass="cell_medium_label" text="Payment Details: " />
       <Label fx:id="paid" styleClass="cell_small_label" text="\$paid" />
+      <Label fx:id="session" styleClass="cell_small_label" text="\$session" />
       <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
     </VBox>
   </GridPane>

@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SESSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -37,6 +38,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Paid;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Session;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
@@ -59,6 +61,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_HEIGHT + "HEIGHT] "
             + "[" + PREFIX_WEIGHT + "WEIGHT] "
             + "[" + PREFIX_PAID + "PAID] "
+            + "[" + PREFIX_SESSION + "SESSION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -100,6 +103,10 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        if (model.hasSessionConflict(editedPerson, personToEdit)) {
+            throw new CommandException(AddCommand.MESSAGE_CONFLICTING_SESSION);
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
@@ -125,9 +132,10 @@ public class EditCommand extends Command {
         Bodyfat updatedBodyfat = editPersonDescriptor.getBodyfat().orElse(personToEdit.getBodyfat());
         Age updatedAge = editPersonDescriptor.getAge().orElse(personToEdit.getAge());
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
+        Session updatedSession = editPersonDescriptor.getSession().orElse(personToEdit.getSession());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedGoal,
                 updatedHeight, updatedWeight, updatedAge, updatedGender, updatedDeadline, updatedPaid,
-                updatedBodyfat, updatedTags);
+                updatedBodyfat, updatedSession, updatedTags);
     }
 
     @Override
@@ -169,6 +177,7 @@ public class EditCommand extends Command {
         private Goal goal;
         private Paid paid;
         private Bodyfat bodyfat;
+        private Session session;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -189,12 +198,13 @@ public class EditCommand extends Command {
             setPaid(toCopy.paid);
             setGoal(toCopy.goal);
             setBodyfat(toCopy.bodyfat);
+            setSession(toCopy.session);
             setTags(toCopy.tags);
         }
 
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, height, weight, age, gender,
-                    deadline, tags, paid, bodyfat);
+                    deadline, tags, paid, bodyfat, session);
         }
 
         public void setName(Name name) {
@@ -298,6 +308,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(paid);
         }
 
+        public void setSession(Session session) {
+            this.session = session;
+        }
+
+        public Optional<Session> getSession() {
+            return Optional.ofNullable(session);
+        }
+
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
@@ -327,6 +345,7 @@ public class EditCommand extends Command {
                     && Objects.equals(goal, otherEditPersonDescriptor.goal)
                     && Objects.equals(bodyfat, otherEditPersonDescriptor.bodyfat)
                     && Objects.equals(paid, otherEditPersonDescriptor.paid)
+                    && Objects.equals(session, otherEditPersonDescriptor.session)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -343,6 +362,7 @@ public class EditCommand extends Command {
                     .add("goal", goal)
                     .add("bodyfat", bodyfat)
                     .add("paid", paid)
+                    .add("session", session)
                     .add("tags", tags)
                     .toString();
         }

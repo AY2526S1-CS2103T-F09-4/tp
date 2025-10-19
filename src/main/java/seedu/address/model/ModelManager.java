@@ -94,6 +94,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasSessionConflict(Person person) {
+        requireNonNull(person);
+        return addressBook.hasSessionConflict(person);
+    }
+
+    @Override
+    public boolean hasSessionConflict(Person person, Person toIgnore) {
+        requireAllNonNull(person, toIgnore);
+        return addressBook.hasSessionConflict(person, toIgnore);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }

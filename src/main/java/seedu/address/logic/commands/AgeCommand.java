@@ -70,6 +70,7 @@ public class AgeCommand extends Command {
                 personToEdit.getDeadline(),
                 personToEdit.getPaymentStatus(),
                 personToEdit.getBodyfat(),
+                personToEdit.getSession(),
                 personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
