@@ -1,0 +1,158 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package Logic as LogicPackage {
+
+Class "{abstract}\nCommand" as Command {
+    +execute(Model) : CommandResult
+}
+
+Class SortByPaidCommand {
+    +COMMAND_WORD : String
+    +MESSAGE_USAGE : String
+    +MESSAGE_SORT_SUCCESS : String
+    +execute(Model) : CommandResult
+    +equals(Object) : boolean
+}
+
+Class SortByPaidCommandParser {
+    +parse(String) : SortByPaidCommand
+}
+
+Class CommandResult {
+    -feedbackToUser : String
+    -showHelp : boolean
+    -exit : boolean
+    +getFeedbackToUser() : String
+    +isShowHelp() : boolean
+    +isExit() : boolean
+}
+
+Class LogicManager {
+    -model : Model
+    -storage : Storage
+    -addressBookParser : AddressBookParser
+    +execute(String) : CommandResult
+    +getFilteredPersonList() : ObservableList<Person>
+}
+
+Class "<<interface>>\nLogic" as Logic {
+    +execute(String) : CommandResult
+    +getFilteredPersonList() : ObservableList<Person>
+}
+
+}
+
+package Model {
+Class Person {
+    -name : Name
+    -phone : Phone
+    -email : Email
+    -address : Address
+    -paid : Paid
+    -deadline : Deadline
+    -goal : Goal
+    -height : Height
+    -weight : Weight
+    -age : Age
+    -gender : Gender
+    -bodyfat : Bodyfat
+    -session : Session
+    -tags : Set<Tag>
+    +getPaymentStatus() : Paid
+    +getName() : Name
+    +getPhone() : Phone
+    +getEmail() : Email
+    +getAddress() : Address
+    +getPaid() : Paid
+    +isSamePerson(Person) : boolean
+}
+
+Class Paid {
+    -value : boolean
+    +Paid(String)
+    +isValidPaid(String) : boolean
+    +toString() : String
+    +equals(Object) : boolean
+    +hashCode() : int
+}
+
+Class AddressBook {
+    -persons : UniquePersonList
+    +sortByPaid() : void
+    +addPerson(Person) : void
+    +removePerson(Person) : void
+    +setPerson(Person, Person) : void
+    +getPersonList() : ObservableList<Person>
+}
+
+Class UniquePersonList {
+    -internalList : ObservableList<Person>
+    -internalUnmodifiableList : ObservableList<Person>
+    +sortByPaid() : void
+    +add(Person) : void
+    +remove(Person) : void
+    +setPerson(Person, Person) : void
+    +asUnmodifiableObservableList() : ObservableList<Person>
+}
+
+Class ModelManager {
+    -addressBook : AddressBook
+    -userPrefs : UserPrefs
+    -filteredPersons : FilteredList<Person>
+    +sortPersonListByPaid() : void
+    +getFilteredPersonList() : ObservableList<Person>
+    +updateFilteredPersonList(Predicate<Person>) : void
+}
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Logic
+
+' Command hierarchy
+Command <|-- SortByPaidCommand
+
+' Parser relationships
+SortByPaidCommandParser ..> SortByPaidCommand : <<create>>
+
+' Command execution flow
+LogicManager .right.|> Logic
+LogicManager .left.> SortByPaidCommand : <<call>>
+SortByPaidCommand .right.> ModelManager : <<call>>
+SortByPaidCommand .up.> CommandResult : <<create>>
+
+' Model relationships
+ModelManager --> AddressBook : delegates to
+AddressBook --> UniquePersonList : delegates to
+UniquePersonList --> Person : sorts by
+Person --> Paid : contains
+
+Logic ..> CommandResult
+LogicManager .down.> CommandResult
+
+note right of SortByPaidCommand
+  Sorts person list by paid status:
+  - Unpaid clients (false) first
+  - Paid clients (true) second
+  - Uses Boolean.compare() for sorting
+end note
+
+note right of SortByPaidCommandParser
+  Parses "sortbypaid" command
+  with no arguments required
+  - Validates empty input
+  - Creates SortByPaidCommand instance
+end note
+
+note right of UniquePersonList
+  Performs actual sorting logic:
+  - Compares Person.getPaymentStatus().value
+  - Sorts using internalList.sort()
+  - Unpaid (false) comes before paid (true)
+end note
+
+@enduml
