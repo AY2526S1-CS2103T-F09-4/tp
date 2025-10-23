@@ -111,7 +111,7 @@
         "ab-3-user-guide": "AB-3 User Guide",
         "quick-start": "Quick start",
         "features": "Features",
-        "viewing-help-help": "Viewing help : help",
+        "help-window-help": "Help window: help",
         "adding-a-person-add": "Adding a person: add",
         "listing-all-persons-list": "Listing all persons : list",
         "editing-a-person-edit": "Editing a person : edit",
@@ -125,6 +125,7 @@
         "archiving-data-files-coming-in-v2-0": "Archiving data files [coming in v2.0]",
         "faq": "FAQ",
         "known-issues": "Known issues",
+        "session-formatting-guide": "Session Formatting Guide:",
         "command-summary": "Command summary"
       },
       "headingKeywords": {}
