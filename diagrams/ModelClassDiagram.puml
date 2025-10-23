@@ -36,6 +36,11 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Bodyfat
+Person *--> Gender
+Person *--> Age
+Person *--> Weight
+Person *--> Height
 Person *--> "*" Tag
 Person *--> Session : session
 Session *--> SessionRecurringSlot : recurringSlots
