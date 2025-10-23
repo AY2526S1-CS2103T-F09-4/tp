@@ -9,7 +9,13 @@ Class "<<interface>>\nUi" as Ui
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
-Class HelpWindow
+Class HelpWindow {
+    show()
+    focus()
+    isShowing()
+    openUserGuide()
+    copyUrl()
+}
 Class ResultDisplay
 Class PersonListPanel
 Class PersonCard
