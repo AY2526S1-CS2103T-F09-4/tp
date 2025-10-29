@@ -4,7 +4,6 @@ plugins {
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'jacoco'
-    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 java {
@@ -19,11 +18,19 @@ application {
     ]
 }
 
-javafx {
-    // 17.x to match JDK 17
-    version = '17.0.7'
-    // modules you actually use:
-    modules = ['javafx.base', 'javafx.graphics', 'javafx.controls', 'javafx.fxml', 'javafx.web', 'javafx.media']
+
+def osName = System.getProperty('os.name').toLowerCase()
+def osArch = System.getProperty('os.arch').toLowerCase()
+def platform
+
+if (osName.contains('win')) {
+    platform = 'win'
+} else if (osName.contains('mac')) {
+    platform = osArch.contains('aarch64') || osArch.contains('arm') ? 'mac-aarch64' : 'mac'
+} else if (osName.contains('linux')) {
+    platform = osArch.contains('aarch64') || osArch.contains('arm') ? 'linux-aarch64' : 'linux'
+} else {
+    throw new GradleException("Unsupported OS: $osName $osArch")
 }
 
 repositories {
@@ -64,7 +71,7 @@ tasks.register('coverage', JacocoReport) {
 
 
 tasks.withType(JavaExec).configureEach {
-    // defensively add modules in case a custom run task bypasses the plugin config
+    // defensively add modules in case a custom run task bypasses the standard configuration
     jvmArgs += ['--add-modules', 'javafx.base,javafx.graphics,javafx.controls,javafx.fxml,javafx.web,javafx.media']
     standardInput = System.in
 }
@@ -80,6 +87,13 @@ dependencies {
     // CommonMark markdown renderer (safe and recent)
     implementation 'org.commonmark:commonmark:0.22.0'
     implementation 'org.commonmark:commonmark-ext-gfm-tables:0.22.0'
+
+    implementation "org.openjfx:javafx-base:17.0.7:${platform}"
+    implementation "org.openjfx:javafx-graphics:17.0.7:${platform}"
+    implementation "org.openjfx:javafx-controls:17.0.7:${platform}"
+    implementation "org.openjfx:javafx-fxml:17.0.7:${platform}"
+    implementation "org.openjfx:javafx-web:17.0.7:${platform}"
+    implementation "org.openjfx:javafx-media:17.0.7:${platform}"
 
     // Unit tests
     testImplementation "org.junit.jupiter:junit-jupiter-api:${jUnitVersion}"
