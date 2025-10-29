@@ -117,6 +117,8 @@
         "editing-a-person-edit": "Editing a person : edit",
         "locating-persons-by-name-find": "Locating persons by name: find",
         "deleting-a-person-delete": "Deleting a person : delete",
+        "switching-to-the-client-list-client": "Switching to the client list : client",
+        "switching-to-the-dashboard-dashboard": "Switching to the dashboard : dashboard",
         "clearing-all-entries-clear": "Clearing all entries : clear",
         "exiting-the-program-exit": "Exiting the program : exit",
         "sorting-persons-by-paid-status-sortbypaid": "Sorting persons by paid status: sortbypaid",
