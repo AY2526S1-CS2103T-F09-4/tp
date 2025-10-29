@@ -77,6 +77,40 @@
       "headingKeywords": {}
     },
     {
+      "src": "Fitbook_User_Guide.md",
+      "title": "User Guide",
+      "headings": {
+        "fitbook-user-guide": "FitBook User Guide",
+        "quick-start": "Quick Start",
+        "command-reference": "Command Reference",
+        "add-add-a-trainee": "add — Add a trainee",
+        "edit-edit-a-trainee": "edit — Edit a trainee",
+        "list-view-all-trainees": "list — View all trainees",
+        "find-search-trainees-by-name": "find — Search trainees by name",
+        "delete-remove-a-trainee": "delete — Remove a trainee",
+        "clear-delete-all-trainees": "clear — Delete all trainees",
+        "sortbypaid-sort-trainees-by-payment-status": "sortbypaid — Sort trainees by payment status",
+        "sortbydeadline-sort-trainees-by-payment-deadline": "sortbydeadline — Sort trainees by payment deadline",
+        "session-update-a-trainee-s-scheduled-session": "session — Update a trainee’s scheduled session",
+        "goal-set-or-clear-a-fitness-goal": "goal — Set or clear a fitness goal",
+        "deadline-update-a-goal-deadline": "deadline — Update a goal deadline",
+        "paid-record-payment-status": "paid — Record payment status",
+        "height-weight-age-bodyfat-gender-update-individual-attributes": "height, weight, age, bodyfat, gender — Update individual attributes",
+        "client-switch-to-client-list-view": "client — Switch to client list view",
+        "dashboard-switch-to-dashboard-view": "dashboard — Switch to dashboard view",
+        "help-open-help-window": "help — Open help window",
+        "exit-close-the-program": "exit — Close the program",
+        "data-handling": "Data Handling",
+        "saving-data": "Saving data",
+        "data-file-location": "Data file location",
+        "editing-data-manually": "Editing data manually",
+        "faq": "FAQ",
+        "known-issues": "Known Issues",
+        "appendix-session-formatting-guide": "Appendix: Session Formatting Guide"
+      },
+      "headingKeywords": {}
+    },
+    {
       "src": "Logging.md",
       "title": "Logging guide",
       "headings": {
