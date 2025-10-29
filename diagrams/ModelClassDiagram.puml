@@ -36,11 +36,14 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> Bodyfat
-Person *--> Gender
-Person *--> Age
-Person *--> Weight
+Person *--> Goal
 Person *--> Height
+Person *--> Weight
+Person *--> Age
+Person *--> Gender
+Person *--> Deadline
+Person *--> Paid
+Person *--> Bodyfat
 Person *--> "*" Tag
 Person *--> Session : session
 Session *--> SessionRecurringSlot : recurringSlots

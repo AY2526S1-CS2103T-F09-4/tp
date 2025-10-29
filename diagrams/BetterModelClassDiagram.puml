@@ -18,4 +18,13 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Goal
+Person *--> Height
+Person *--> Weight
+Person *--> Age
+Person *--> Gender
+Person *--> Deadline
+Person *--> Paid
+Person *--> Bodyfat
+Person *--> Session
 @enduml
