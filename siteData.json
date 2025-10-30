@@ -110,9 +110,13 @@
       "headings": {
         "fitbook-user-guide": "FitBook User Guide",
         "welcome-trainers": "Welcome Trainers!",
+        "table-of-contents": "Table of Contents",
         "quick-start": "Quick Start",
+        "command-summary": "Command Summary",
         "ui-guide": "UI Guide",
         "command-reference": "Command Reference",
+        "format-conventions": "Format conventions",
+        "important-input-rule": "⚠️ Important Input Rule",
         "add-add-a-client": "add — Add a client",
         "edit-edit-a-client": "edit — Edit a client",
         "list-view-all-clients": "list — View all clients",
@@ -136,8 +140,7 @@
         "data-file-location": "Data file location",
         "editing-data-manually": "Editing data manually",
         "faq": "FAQ",
-        "known-issues": "Known Issues",
-        "appendix-session-formatting-guide": "Appendix: Session Formatting Guide"
+        "known-issues": "Known Issues"
       },
       "headingKeywords": {}
     },
