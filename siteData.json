@@ -40,7 +40,7 @@
       "src": "DeveloperGuide.md",
       "title": "Developer Guide",
       "headings": {
-        "ab-3-developer-guide": "AB-3 Developer Guide",
+        "fitbook-developer-guide": "FitBook Developer Guide",
         "acknowledgements": "Acknowledgements",
         "setting-up-getting-started": "Setting up, getting started",
         "design": "Design",
@@ -62,7 +62,7 @@
         "non-functional-requirements": "Non-Functional Requirements",
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
-        "launch-aqnd-shutdown": "Launch aqnd shutdown",
+        "launch-and-shutdown": "Launch and shutdown",
         "deleting-a-person": "Deleting a person",
         "saving-data": "Saving data"
       },
@@ -128,7 +128,7 @@
         "sortbysession-sort-clients-by-upcoming-session": "sortbysession — Sort clients by upcoming session",
         "session-update-a-client-s-scheduled-session": "session — Update a client’s scheduled session",
         "goal-set-or-clear-a-fitness-goal": "goal — Set or clear a fitness goal",
-        "deadline-update-a-goal-deadline": "deadline — Update a goal deadline",
+        "deadline-update-a-payment-deadline": "deadline — Update a payment deadline",
         "paid-record-payment-status": "paid — Record payment status",
         "height-weight-age-bodyfat-gender-update-individual-attributes": "height, weight, age, bodyfat, gender — Update individual attributes",
         "client-switch-to-client-list-view": "client — Switch to client list view",
