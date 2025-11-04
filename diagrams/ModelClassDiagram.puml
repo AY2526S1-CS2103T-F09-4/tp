@@ -1,4 +1,17 @@
 @startuml
+scale 1.75
+
+skinparam classFontSize 18
+skinparam arrowFontSize 16
+
+Interface "<<interface>>\nModel" as Model
+Class ModelManager
+Class AddressBook
+Interface "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class UserPrefs
+Interface "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class UniquePersonList
+Class Person
 
 Class Tag
 
@@ -27,8 +40,12 @@ Enum SessionType {
 
 Class ConflictingSessionException
 
-Class I #FFFFFF
-
+ModelManager ..|> Model
+ModelManager *--> AddressBook
+ModelManager *--> UserPrefs
+AddressBook ..|> ReadOnlyAddressBook
+UserPrefs ..|> ReadOnlyUserPrefs
+AddressBook *--> UniquePersonList
 UniquePersonList --> "~* all" Person
 UniquePersonList ..> Session : checks conflicts
 UniquePersonList ..> ConflictingSessionException : <<throws>>
@@ -48,6 +65,7 @@ Person *--> "*" Tag
 Person *--> Session : session
 Session *--> SessionRecurringSlot : recurringSlots
 Session --> SessionType : type
+ModelManager --> "~* filtered" Person
 
 Address -[hidden]right-> Email
 
@@ -55,6 +73,4 @@ note right of Session
   Supports multi-slot WEEKLY/BIWEEKLY sessions
   and prevents overlapping recurring slots.
 end note
-
-ModelManager --> "~* filtered" Person
 @enduml

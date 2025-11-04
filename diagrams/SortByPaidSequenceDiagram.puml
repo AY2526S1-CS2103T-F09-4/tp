@@ -3,7 +3,7 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
 
-actor User
+actor Trainer
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":SortByPaidCommandParser" as SortByPaidCommandParser LOGIC_COLOR
@@ -11,8 +11,9 @@ participant ":SortByPaidCommand" as SortByPaidCommand LOGIC_COLOR
 participant ":Model" as Model LOGIC_COLOR
 participant ":AddressBook" as AddressBook LOGIC_COLOR
 participant ":UniquePersonList" as UniquePersonList LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
 
-User -> LogicManager : execute("sortbypaid")
+Trainer -> LogicManager : execute("sortbypaid")
 activate LogicManager
 
 LogicManager -> AddressBookParser : parseCommand("sortbypaid")
@@ -21,8 +22,8 @@ activate AddressBookParser
 AddressBookParser -> SortByPaidCommandParser : parse("")
 activate SortByPaidCommandParser
 
-SortByPaidCommandParser -> SortByPaidCommand : new SortByPaidCommand()
-activate SortByPaidCommand
+create SortByPaidCommand
+SortByPaidCommandParser -> SortByPaidCommand
 SortByPaidCommandParser --> AddressBookParser : SortByPaidCommand
 deactivate SortByPaidCommandParser
 
@@ -57,11 +58,17 @@ deactivate AddressBook
 Model --> SortByPaidCommand : sorted
 deactivate Model
 
-SortByPaidCommand -> SortByPaidCommand : new CommandResult("List sorted by paid status...")
-SortByPaidCommand --> LogicManager : CommandResult
+create CommandResult
+SortByPaidCommand -> CommandResult : new CommandResult("List sorted by paid status...")
+activate CommandResult
+
+CommandResult --> SortByPaidCommand
+deactivate CommandResult
+
+SortByPaidCommand --> LogicManager : r
 deactivate SortByPaidCommand
 
-LogicManager --> User : "List sorted by paid status (unpaid first, paid second)"
+LogicManager --> Trainer : "List sorted by paid status (unpaid first, paid second)"
 deactivate LogicManager
 
 @enduml

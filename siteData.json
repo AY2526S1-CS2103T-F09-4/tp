@@ -53,7 +53,6 @@
         "implementation": "Implementation",
         "sort-by-paid-status-feature": "Sort by Paid Status feature",
         "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
-        "proposed-data-archiving": "[Proposed] Data archiving",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
         "appendix-planned-enhancements": "Appendix: Planned Enhancements",
         "1-clarify-session-slot-conflicts-for-multi-slot-commands": "1. Clarify session slot conflicts for multi-slot commands",
