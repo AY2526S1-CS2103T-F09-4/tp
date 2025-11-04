@@ -62,6 +62,8 @@
         "4-display-error-message-for-unknown-or-invalid-prefixes-in-commands": "4. Display error message for unknown or invalid prefixes in commands",
         "5-improve-handling-of-optional-fields-during-data-storage": "5. Improve handling of optional fields during data storage",
         "6-improve-error-message-clarity-for-missing-tags-in-the-add-command": "6. Improve error message clarity for missing tags in the add command",
+        "7-fix-gui-issues-with-window-resizing-and-truncated-fields": "7. Fix GUI issues with window resizing and truncated fields.",
+        "8-improve-find-command-search-to-be-less-strict": "8. Improve find command search to be less strict",
         "appendix-requirements": "Appendix: Requirements",
         "product-scope": "Product scope",
         "user-stories": "User stories",
